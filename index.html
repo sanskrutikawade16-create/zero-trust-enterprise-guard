@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZeroTrust Enterprise Guard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>ZeroTrust Enterprise Guard</h1>
+    <p>Zero Trust Architecture Simulation Dashboard</p>
+  </div>
+  <span class="badge">Prototype</span>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <h2>Never Trust. Always Verify.</h2>
+      <p>Interactive simulation of identity verification, MFA, RBAC, device trust, micro-segmentation and threat detection.</p>
+    </div>
+    <button id="resetBtn">Reset Simulation</button>
+  </section>
+
+  <section class="stats">
+    <div class="card"><span>Security Score</span><strong id="score">92%</strong></div>
+    <div class="card"><span>Active Users</span><strong>128</strong></div>
+    <div class="card"><span>Protected Resources</span><strong>24</strong></div>
+    <div class="card"><span>Blocked Threats</span><strong id="blocked">17</strong></div>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <h3>1. Identity & MFA Verification</h3>
+      <label>User
+        <select id="user">
+          <option value="employee">Employee</option>
+          <option value="manager">Manager</option>
+          <option value="admin">Administrator</option>
+          <option value="attacker">Unknown User</option>
+        </select>
+      </label>
+      <label>Password status
+        <select id="password">
+          <option value="valid">Valid</option>
+          <option value="invalid">Invalid</option>
+        </select>
+      </label>
+      <label>MFA
+        <select id="mfa">
+          <option value="verified">Verified</option>
+          <option value="failed">Failed</option>
+        </select>
+      </label>
+      <button onclick="verifyIdentity()">Verify Identity</button>
+      <div id="identityResult" class="result neutral">Waiting for verification...</div>
+    </div>
+
+    <div class="panel">
+      <h3>2. RBAC Access Control</h3>
+      <p>Role-based permissions determine which resources a verified identity can access.</p>
+      <div class="roles">
+        <div><b>Employee</b><br>HR Portal, Email</div>
+        <div><b>Manager</b><br>HR Portal, Reports, Email</div>
+        <div><b>Admin</b><br>All approved resources</div>
+      </div>
+      <label>Resource
+        <select id="resource">
+          <option value="email">Corporate Email</option>
+          <option value="hr">HR Portal</option>
+          <option value="reports">Management Reports</option>
+          <option value="admin">Admin Console</option>
+        </select>
+      </label>
+      <button onclick="checkRBAC()">Check Authorization</button>
+      <div id="rbacResult" class="result neutral">Waiting for authorization...</div>
+    </div>
+
+    <div class="panel">
+      <h3>3. Device Trust & Encryption</h3>
+      <label>Device
+        <select id="device">
+          <option value="managed">Managed Corporate Device</option>
+          <option value="unknown">Unknown Device</option>
+          <option value="compromised">Compromised Device</option>
+        </select>
+      </label>
+      <label>Encryption
+        <select id="encryption">
+          <option value="enabled">Encryption Enabled</option>
+          <option value="disabled">Encryption Disabled</option>
+        </select>
+      </label>
+      <button onclick="checkDevice()">Evaluate Device</button>
+      <div id="deviceResult" class="result neutral">Waiting for device evaluation...</div>
+    </div>
+
+    <div class="panel">
+      <h3>4. Micro-Segmentation</h3>
+      <p>Network zones are isolated so a compromised endpoint cannot freely reach every resource.</p>
+      <div class="network">
+        <span>User Zone</span><i>→</i><span>Application Zone</span><i>→</i><span>Database Zone</span>
+      </div>
+      <button onclick="simulateSegmentation()">Test Network Path</button>
+      <div id="segmentResult" class="result neutral">No path test performed.</div>
+    </div>
+  </section>
+
+  <section class="panel threat-panel">
+    <h3>5. Threat Simulation</h3>
+    <p>Run controlled scenarios to demonstrate how Zero Trust policies respond.</p>
+    <div class="threat-buttons">
+      <button onclick="simulateThreat('external')">External Attack</button>
+      <button onclick="simulateThreat('insider')">Insider Threat</button>
+      <button onclick="simulateThreat('stolen')">Stolen Credentials</button>
+    </div>
+    <div id="threatResult" class="result neutral">Choose a scenario to begin.</div>
+  </section>
+
+  <section class="panel">
+    <h3>IAM Policy Engine</h3>
+    <table>
+      <thead><tr><th>Policy</th><th>Condition</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Require MFA</td><td>Every login</td><td>Allow only after verification</td></tr>
+        <tr><td>RBAC</td><td>Role + resource</td><td>Least-privilege access</td></tr>
+        <tr><td>Device Trust</td><td>Managed + secure</td><td>Permit resource access</td></tr>
+        <tr><td>Segmentation</td><td>Network zone</td><td>Block unauthorized lateral movement</td></tr>
+        <tr><td>Encryption</td><td>Data in transit</td><td>Require protected connection</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel">
+    <h3>Security Event Log</h3>
+    <div id="logs" class="logs"><div>System initialized — Zero Trust monitoring active.</div></div>
+  </section>
+</main>
+
+<footer>Developed by Sanskruti Kawade • Academic Prototype • Zero Trust Enterprise Security</footer>
+<script src="script.js"></script>
+</body>
+</html>
